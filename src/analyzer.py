@@ -4,6 +4,8 @@ import numpy as np
 class MinerAnalyzer:
     def __init__(self, data_path):
         self.df = pd.read_csv(data_path)
+        # Robustness: Strip any trailing spaces from headers
+        self.df.columns = self.df.columns.str.strip()
         self.df['timestamp'] = pd.to_datetime(self.df['timestamp'])
         self.insights = []
 
@@ -26,7 +28,11 @@ class MinerAnalyzer:
         
         for name, group in drops.groupby('miner_id'):
             # Check: Correlation between hashrate and rising temperature
-            temp_corr = group['hashrate_ths'].corr(group['chip_temp_c'])
+            # Only compute if we have enough variance and rows
+            if len(group) > 1 and group['chip_temp_c'].std() > 0:
+                temp_corr = group['hashrate_ths'].corr(group['chip_temp_c'])
+            else:
+                temp_corr = 0 # Default if no variation
             
             self.insights.append({
                 "category": "Performance Impact",
