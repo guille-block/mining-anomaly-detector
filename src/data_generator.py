@@ -69,5 +69,25 @@ def generate_mining_data(output_path="telemetry_data.csv", num_miners=5, hours=2
     print(f"Synthentic data generated at {output_path} with {len(df)} rows.")
     return output_path
 
+def save_sample_data(output_path="sample_data.csv"):
+    """
+    Saves the specific sample dataset provided in the original challenge document.
+    """
+    raw_data = """timestamp,miner_id,hashrate_ths,chip_temp_c,immersion_temp_c,immersion_pressure_bar
+2025-01-01T10:00:00Z,M001,110,78,52,1.8
+2025-01-01T10:05:00Z,M001,112,79,53,1.8
+2025-01-01T10:10:00Z,M001,95,92,54,1.9
+2025-01-01T10:00:00Z,M002,108,75,51,1.7
+2025-01-01T10:05:00Z,M002,107,76,51,1.7
+2025-01-01T10:10:00Z,M002,106,77,52,1.7
+2025-01-01T10:00:00Z,M003,115,80,52,1.8
+2025-01-01T10:05:00Z,M003,114,81,53,1.8
+2025-01-01T10:10:00Z,M003,70,98,55,2.1"""
+    
+    with open(output_path, "w") as f:
+        f.write(raw_data)
+    print(f"Original challenge sample data saved to {output_path}")
+    return output_path
+
 if __name__ == "__main__":
     generate_mining_data()
