@@ -46,14 +46,6 @@ Upon execution, you will be prompted to choose between:
 - **Correlation Analysis:** Uses Pearson correlation between hashrate and temperature to confirm thermal throttling.
 - **Delta Analysis:** Monitors the first derivative of temperature and pressure to catch sudden failures (e.g., pump stops).
 
-## Scaling to Production
-
-To extend this to a real-time production system:
-1.  **Ingestion:** Replace the CSV loader with a stream processor (e.g., Kafka or MQTT) connected to the mining controller API.
-2.  **Time-Series Database:** Use InfluxDB or Prometheus for long-term storage of telemetry.
-3.  **Alerting:** Integrate the analysis categories with PagerDuty or Slack for real-time operational response.
-4.  **Model Retraining:** Use the identified anomalies to train a more sophisticated machine learning model (e.g., LSTMs) for predictive maintenance.
-
 ## Output
 
 The system generates:
